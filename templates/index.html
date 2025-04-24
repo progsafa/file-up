@@ -1,0 +1,25 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Network Traffic Classifier</title>
+  </head>
+  <body>
+    <h2>Upload CSV File</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept=".csv" required>
+      <input type="submit" value="Upload">
+    </form>
+
+    {% if error %}
+      <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    {% if normal_count is not none %}
+      <h3>Classification Results:</h3>
+      <p>Normal: {{ normal_count }} ({{ normal_pct }}%)</p>
+      <p>Attack: {{ attack_count }} ({{ attack_pct }}%)</p>
+      <img src="{{ url_for('static', filename='chart.png') }}" alt="Pie Chart">
+    {% endif %}
+  </body>
+</html>
